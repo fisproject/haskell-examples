@@ -2,10 +2,10 @@ haskell-examples
 ====
 
 ## Overview
-“Learn You a Haskell for Great Good!” by http://learnyouahaskell.com
+haskell-examples
 
 ## Description
-Learn haskell
+[Learn You a Haskell for Great Good!](http://learnyouahaskell.com)
 
 ## License
-See http://learnyouahaskell.com/faq
+See [faq](http://learnyouahaskell.com/faq)
