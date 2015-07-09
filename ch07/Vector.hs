@@ -13,6 +13,6 @@ vmult :: (Num a) => Vector a -> a -> Vector a
 (Vector i j k) `vmult` m = Vector (i*m) (j*m) (k*m)
 
 main = do
-	print $ Vector 3 4 5 `vplus` Vector 6 7 8
-	print $ Vector 3 4 5 `dotprod` Vector 6 7 8
-	print $ Vector 3 4 5 `vmult` 2
+ print $ Vector 3 4 5 `vplus` Vector 6 7 8
+ print $ Vector 3 4 5 `dotprod` Vector 6 7 8
+ print $ Vector 3 4 5 `vmult` 2

@@ -7,5 +7,5 @@ maxinum' [x] = x
 maxinum' (x:xs) = max x (maxinum' xs)
 
 main = do
-    print $ fact 7
-    print $ maxinum'[1,2,3,4,5,10]
+ print $ fact 7 -- 5040
+ print $ maxinum'[1,2,3,4,5,10] -- 10

@@ -1,10 +1,10 @@
 module Geometry (
-	sphereVolume
-	,sphereArea
-	,cubeVolume
-	,cubeArea
-	,cuboidVolume
-	,cuboidArea
+ sphereVolume
+ ,sphereArea
+ ,cubeVolume
+ ,cubeArea
+ ,cuboidVolume
+ ,cuboidArea
 ) where
 
 sphereVolume :: Float -> Float

@@ -10,13 +10,13 @@ data FSCrumb = FSCrumb Name [FSItem] [FSItem] deriving (Show)
 type FSZipper = (FSItem, [FSCrumb])
 
 fsUp :: FSZipper -> FSZipper
-fsUp (item, (FSCrumb name ls rs):bs) = (Folder name (ls ++ [item] ++ rs), bs)
+fsUp (item, FSCrumb name ls rs : bs) = (Folder name (ls ++ [item] ++ rs), bs)
 fsUp (item, []) = (item, [])
 
 fsTo :: Name -> FSZipper -> FSZipper
 fsTo name (Folder folderName items, bs) =
-  case break (nameIs name) items of
-    (ls, item:rs) -> (item, (FSCrumb folderName ls rs):bs)
+  case break (nameIs name) items of 
+    (ls, item:rs) -> (item, FSCrumb folderName ls rs : bs)
 
 nameIs :: Name -> FSItem -> Bool
 nameIs name (Folder itemName _) = name == itemName
@@ -53,5 +53,5 @@ myDisk =
 
 -- ghci
 main = do
-	let newFocus = (myDisk, []) -: fsTo "pics" -: fsTo "a.bmp"
-	print $ fst newFocus
+ let newFocus = (myDisk, []) -: fsTo "pics" -: fsTo "a.bmp"
+ print $ fst newFocus

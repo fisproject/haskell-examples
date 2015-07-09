@@ -11,14 +11,14 @@ type Zipper a = (Tree a, Breadcrumbs a)
 x -: f = f x
 
 goLeft :: (Tree a, Breadcrumbs a) -> (Tree a, Breadcrumbs a)
-goLeft (Node x l r, bs) = (l, (LeftCrumb x r):bs)
+goLeft (Node x l r, bs) = (l, LeftCrumb x r : bs)
 
 goRight :: (Tree a, Breadcrumbs a) -> (Tree a, Breadcrumbs a)
-goRight (Node x l r, bs) = (r, (RightCrumb x l):bs)
+goRight (Node x l r, bs) = (r, RightCrumb x l : bs)
 
 goUp :: (Tree a, Breadcrumbs a) -> (Tree a, Breadcrumbs a)
-goUp (t, (LeftCrumb x r):bs) = (Node x t r, bs)
-goUp (t, (RightCrumb x l):bs) = (Node x l t, bs)
+goUp (t, LeftCrumb x r : bs) = (Node x t r, bs)
+goUp (t, RightCrumb x l : bs) = (Node x l t, bs)
 
 changeToP :: Directions -> Tree Char -> Tree Char
 changeToP (L:ds) (Node x l r) = Node x (changeToP ds l) r
@@ -68,5 +68,10 @@ main = do
     print $ goLeft ( goRight (freeTree, []))
     print $ (freeTree, []) -: goRight -: goLeft
 
-    let newFocus = (freeTree, []) -: goLeft -: goRight -: modify (\_ -> 'P')
-    print $ newFocus
+    let newFocus = (freeTree, []) -: goLeft -: goRight -: modify (const 'p')
+    print newFocus
+
+--'P'
+--(Node 'W' (Node 'C' Empty Empty) (Node 'R' Empty Empty),[LeftCrumb 'L' (Node 'A' (Node 'A' Empty Empty) (Node 'C' Empty Empty)),RightCrumb 'P' (Node 'O' (Node 'L' (Node 'N' Empty Empty) (Node 'T' Empty Empty)) (Node 'Y' (Node 'S' Empty Empty) (Node 'A' Empty Empty)))])
+--(Node 'W' (Node 'C' Empty Empty) (Node 'R' Empty Empty),[LeftCrumb 'L' (Node 'A' (Node 'A' Empty Empty) (Node 'C' Empty Empty)),RightCrumb 'P' (Node 'O' (Node 'L' (Node 'N' Empty Empty) (Node 'T' Empty Empty)) (Node 'Y' (Node 'S' Empty Empty) (Node 'A' Empty Empty)))])
+--(Node 'p' (Node 'S' Empty Empty) (Node 'A' Empty Empty),[RightCrumb 'O' (Node 'L' (Node 'N' Empty Empty) (Node 'T' Empty Empty)),LeftCrumb 'P' (Node 'L' (Node 'W' (Node 'C' Empty Empty) (Node 'R' Empty Empty)) (Node 'A' (Node 'A' Empty Empty) (Node 'C' Empty Empty)))])

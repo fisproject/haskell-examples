@@ -11,7 +11,7 @@ type Stack = [Int]
 newtype State s a = State { runState :: s -> (a,s) }
 
 get = State $ \s -> (s,s)
-put newState = State $ \s -> ((),newState)
+put newState = State $ const ((),newState)
 
 instance Monad (State s) where  
     return x = State $ \s -> (x,s)  
@@ -33,19 +33,19 @@ stackManip = do
 
 stackStuff :: State Stack ()
 stackStuff = do
-	a <- pop
-	if a == 5
-		then push 5
-		else do
-			push 3
-			push 8
+    a <- pop
+    if a == 5
+        then push 5
+        else do
+            push 3
+            push 8
 
 moreStack :: State Stack ()
 moreStack = do
-	a <- stackManip
-	if a == 100
-		then stackStuff
-		else return()
+    a <- stackManip
+    if a == 100
+        then stackStuff
+        else return()
 
 stackyStack :: State Stack ()  
 stackyStack = do  
@@ -55,5 +55,5 @@ stackyStack = do
         else put [9,2,1]
 
 main = do
-	print $ runState stackManip [5,8,2,1]
-	print $ runState stackStuff [9,0,2,1,0]
+    print $ runState stackManip [5,8,2,1]
+    print $ runState stackStuff [9,0,2,1,0]
